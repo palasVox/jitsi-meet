@@ -20,7 +20,8 @@ import {
 } from '../base/media';
 import {
     getLocalParticipant,
-    muteRemoteParticipant
+    muteRemoteParticipant,
+    kickRemoteParticipant
 } from '../base/participants';
 
 declare var APP: Object;
@@ -80,6 +81,12 @@ export function muteRemote(participantId: string, mediaType: MEDIA_TYPE) {
     };
 }
 
+export function kickRemote(participantId: string) {
+    return (dispatch: Dispatch<any>) => {
+        //sendAnalytics(createRemoteMuteConfirmedEvent(participantId));
+        dispatch(kickRemoteParticipant(participantId));
+    };
+}
 /**
  * Mutes all participants.
  *
@@ -98,6 +105,22 @@ export function muteAllParticipants(exclude: Array<string>, mediaType: MEDIA_TYP
         participantIds
             .filter(id => !exclude.includes(id))
             .map(id => id === localId ? muteLocal(true, mediaType) : muteRemote(id, mediaType))
+            .map(dispatch);
+        /* eslint-enable no-confusing-arrow */
+    };
+}
+
+export function kickAllParticipants(exclude: Array<string>) {
+    return (dispatch: Dispatch<any>, getState: Function) => {
+        const state = getState();
+        const localId = getLocalParticipant(state).id;
+        const participantIds = state['features/base/participants']
+            .map(p => p.id);
+
+        /* eslint-disable no-confusing-arrow */
+        participantIds
+            .filter(id => !exclude.includes(id))
+            .map(id => id === localId ? muteLocal(true) : kickRemote(id))
             .map(dispatch);
         /* eslint-enable no-confusing-arrow */
     };

@@ -7,6 +7,7 @@ export { default as KickRemoteParticipantDialog } from './KickRemoteParticipantD
 export { default as MuteButton } from './MuteButton';
 export { default as MuteVideoButton } from './MuteVideoButton';
 export { default as MuteEveryoneDialog } from './MuteEveryoneDialog';
+export { default as KickEveryoneDialog } from './KickEveryoneDialog';
 export { default as MuteEveryonesVideoDialog } from './MuteEveryonesVideoDialog';
 export { default as MuteEveryoneElseButton } from './MuteEveryoneElseButton';
 export { default as MuteEveryoneElsesVideoButton } from './MuteEveryoneElsesVideoButton';

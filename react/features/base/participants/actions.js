@@ -210,6 +210,14 @@ export function muteRemoteParticipant(id, mediaType) {
     };
 }
 
+ 	
+export function kickRemoteParticipant(id) {
+    return {
+        type: KICK_PARTICIPANT,
+	id
+     };
+}
+
 /**
  * Action to update a participant's connection status.
  *

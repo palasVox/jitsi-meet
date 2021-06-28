@@ -90,7 +90,7 @@ import HangupButton from '../HangupButton';
 import HelpButton from '../HelpButton';
 import MuteEveryoneButton from '../MuteEveryoneButton';
 import MuteEveryonesVideoButton from '../MuteEveryonesVideoButton';
-
+import KickEveryoneButton from './KickEveryoneButton';
 import AudioSettingsButton from './AudioSettingsButton';
 import OverflowMenuButton from './OverflowMenuButton';
 import OverflowMenuProfileItem from './OverflowMenuProfileItem';
@@ -1076,6 +1076,10 @@ class Toolbox extends Component<Props> {
             this.props._shouldShowButton('mute-everyone')
                 && <MuteEveryoneButton
                     key = 'mute-everyone'
+                    showLabel = { true } />,
+            this.props._shouldShowButton('kick-everyone')
+                && <KickEveryoneButton
+                    key = 'kick-everyone'
                     showLabel = { true } />,
             this.props._shouldShowButton('mute-video-everyone')
                 && <MuteEveryonesVideoButton
