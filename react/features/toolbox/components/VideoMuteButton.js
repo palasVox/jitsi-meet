@@ -153,6 +153,7 @@ class VideoMuteButton extends AbstractVideoMuteButton<Props, *> {
      * @returns {void}
      */
     _setVideoMuted(videoMuted: boolean) {
+	this.tooltip = videoMuted ? 'Start Camera' : 'Stop Camera';
         sendAnalytics(createToolbarEvent(VIDEO_MUTE, { enable: videoMuted }));
         if (this.props._audioOnly) {
             this.props.dispatch(

@@ -1231,7 +1231,7 @@ class Toolbox extends Component<Props> {
                         key = 'chat'
                         onClick = { this._onToolbarToggleChat }
                         toggled = { _chatOpen }
-                        tooltip = { t('toolbar.chat') } />
+                        tooltip = { t(`toolbar.${_chatOpen ? 'closeChat' : 'openChat'}`  ) } />
                     <ChatCounter />
                 </div>) : overflowMenuAdditionalButtons.push(<OverflowMenuItem
                     accessibilityLabel = { t('toolbar.accessibilityLabel.chat') }
