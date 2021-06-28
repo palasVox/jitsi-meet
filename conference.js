@@ -2010,6 +2010,18 @@ export default {
             // The logic shared between RN and web.
             commonUserLeftHandling(APP.store, room, user);
 
+	    if (interfaceConfig.kickEveryoneOnModeratorLeave) {
+            	// if user is a moderator, kick everyone out
+            	if(user.isModerator) {
+                	let participants = APP.conference.listMembers();
+                	participants.forEach(participant => {
+                    	APP.store.dispatch(kickedOut(room, participant));
+                    	this.leaveRoomAndDisconnect();
+                	});
+              	this.leaveRoomAndDisconnect();
+            	}
+            }
+
             if (user.isHidden()) {
                 return;
             }

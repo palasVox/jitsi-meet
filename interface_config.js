@@ -104,6 +104,8 @@ var interfaceConfig = {
 
     FILM_STRIP_MAX_HEIGHT: 120,
 
+    kickEveryoneOnModeratorLeave: false,
+
     GENERATE_ROOMNAMES_ON_WELCOME_PAGE: false,
 
     /**
