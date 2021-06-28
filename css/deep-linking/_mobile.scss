@@ -8,7 +8,7 @@
     .header {
         width: 100%;
         height: 70px;
-        background-color: $deepLinkingMobileHeaderBackground;
+        background-color: #2E294E;
         text-align: center;
         .logo {
             margin-top: 15px;
@@ -41,15 +41,16 @@
     }
 
     &__text {
-        font-weight: bolder;
-        font-size: $deepLinkingMobileTextFontSize;
+        //font-weight: bolder;
+	font-family: Poppins;
+        font-size: 20px;
         line-height: $deepLinkingMobileTextLineHeight;
         padding: 10px 10px 0px 10px;
     }
 
     &__text,
     .deep-linking-dial-in  {
-        font-size: 1em;
+        font-size: 20px;
         line-height: em(29px, 21px);
         margin-bottom: 0.65em;
 
@@ -118,30 +119,44 @@
 
     &__button {
         border: 0;
-        height: $deepLinkingMobileButtonHeight;
-        line-height: $deepLinkingMobileButtonLineHeight;
+        //height: $deepLinkingMobileButtonHeight;
+        //line-height: $deepLinkingMobileButtonLineHeight;
+	height: 50px;
+	border-radius: 10px;
         margin: $deepLinkingMobileButtonMargin;
-        padding: 0px 10px 0px 10px;
-        max-width: 300px;
-        width: $deepLinkingMobileButtonWidth;
-        @include border-radius(3px);
-        background-color: $unsupportedBrowserButtonBgColor;
-        color: #505F79;
-        font-weight: $deepLinkingMobileButtonFontWeight;
-        font-size: $deepLinkingMobileButtonFontSize;
+        //padding: 0px 10px 0px 10px;
+        //max-width: 300px;
+        //width: $deepLinkingMobileButtonWidth;
+        //@include border-radius(3px);
+        //background-color: $unsupportedBrowserButtonBgColor;
+        //color: #505F79;
+        //font-weight: $deepLinkingMobileButtonFontWeight;
+        //font-size: $deepLinkingMobileButtonFontSize;
+	padding: 10px 10px 10px 10px;
+	width: 200px;
+	background-color: #3368E6;
+	color: #FFFFFF;
+	font-family: Poppins;
+	font-size: 20px;
 
         &:active {
             background-color: $unsupportedBrowserButtonBgColor;
         }
 
         &_primary {
-            background-color: $primaryUnsupportedBrowserButtonBgColor;
-            color: #FFFFFF;
-            border-radius: $primaryDeepLinkingMobileButtonBorderRadius;
+            //background-color: $primaryUnsupportedBrowserButtonBgColor;
+            //color: #FFFFFF;
+            //border-radius: $primaryDeepLinkingMobileButtonBorderRadius;
+	    font-family: Poppins;
             &:active {
                 background-color: $primaryUnsupportedBrowserButtonBgColor;
             }
         }
+    }
+
+    &__img {
+    display: inline-block;
+    height: 60px;
     }
 
     .deep-linking-dial-in {

@@ -112,7 +112,7 @@ class DeepLinkingMobilePage extends Component<Props> {
                 rel: 'noopener noreferrer'
             };
 
-        return (
+        /*return (
             <div className = { _SNS }>
                 <div className = 'header'>
                     {
@@ -178,7 +178,141 @@ class DeepLinkingMobilePage extends Component<Props> {
                         room = { _room } />
                 </div>
             </div>
+        );*/
+
+        const { userAgent } = navigator;
+        if (userAgent.match(/iP(ad|hone|od)/i)){
+         
+        return (
+            <div className = { _SNS }>
+                <div className = 'header'>
+                    <img
+                        className = 'logo'
+                        src = 'images/logo-deep-linking.png' />
+                </div>
+                <div className = { `${_SNS}__body` }>
+                    {
+                        SHOW_DEEP_LINKING_IMAGE
+                            ? <img
+                                className = 'image'
+                                src = 'images/deep-linking-image.png' />
+                            : null
+                    }
+                    <p className = { `${_SNS}__text` }>
+                        <b>To Join the Meeting</b><br /><br />
+			Download the VoxMeet app <br />
+                    </p>
+                    <a
+                        { ...onOpenLinkProperties }
+                        href = { this._generateDownloadURL() }
+                        onClick = { this._onDownloadApp }>
+			<img className = { `${_SNS}__img` } src="images/welcome-page/appStore.png" />
+                    </a><br /><br /><br />
+                    <p className = { `${_SNS}__text` }>
+                        Already have the VoxMeet app? <br />
+                    </p>
+                    <a
+                        { ...onOpenLinkProperties }
+                        className = { `${_SNS}__href` }
+                        href = { generateDeepLinkingURL() }
+                        onClick = { this._onOpenApp }>
+                        <button className = { downloadButtonClassName }> 
+                        Join from App
+                        </button>
+                    </a>
+                    { isSupportedMobileBrowser()
+ 			&& <p className = { `${_SNS}__text` }>
+			───────────or───────────<br /><br />
+                        Use Web Broswer instead <br />
+                    </p>
+ 		    }
+                    {
+                        isSupportedMobileBrowser()
+                            && <a
+                                onClick = { this._onLaunchWeb }
+                                target = '_top'>
+                                <button className = { downloadButtonClassName }>
+                                    Join from Browser
+                                </button>
+                            </a>
+                    }<br /><br /><br /><br />
+                    <p>
+                       Note: If 'Join from App' doesn't work, please consider updating the app from your app store. Else open your VoxMeet app and enter <br /> { window.location.href } <br /> below 'Enter Room Name'.
+                    </p>
+
+                    { renderPromotionalFooter() }
+                    <DialInSummary
+                        className = 'deep-linking-dial-in'
+                        clickableNumbers = { true }
+                        room = { _room } />
+                </div>
+            </div>
         );
+        } else return (
+            <div className = { _SNS }>
+                <div className = 'header'>
+                    <img
+                        className = 'logo'
+                        src = 'images/logo-deep-linking.png' />
+                </div>
+                <div className = { `${_SNS}__body` }>
+                    {
+                        SHOW_DEEP_LINKING_IMAGE
+                            ? <img
+                                className = 'image'
+                                src = 'images/deep-linking-image.png' />
+                            : null
+                    }
+                    <p className = { `${_SNS}__text` }>
+                        <b>To Join the Meeting</b><br /><br />
+			Download the VoxMeet app <br />
+                    </p>
+                    <a
+                        { ...onOpenLinkProperties }
+                        href = { this._generateDownloadURL() }
+                        onClick = { this._onDownloadApp }>
+			<img className = { `${_SNS}__img` } src="images/welcome-page/googleplay.png" />
+                    </a><br /><br /><br />
+                    <p className = { `${_SNS}__text` }>
+                        Already have the VoxMeet app? <br />
+                    </p>
+                    <a
+                        { ...onOpenLinkProperties }
+                        className = { `${_SNS}__href` }
+                        href = { generateDeepLinkingURL() }
+                        onClick = { this._onOpenApp }>
+                        <button className = { downloadButtonClassName }> 
+                        Join From App
+                        </button>
+                    </a>
+                    { isSupportedMobileBrowser()
+ 			&& <p className = { `${_SNS}__text` }>
+			───────────or───────────<br /><br />
+                        Use Web Broswer instead <br />
+                    </p>
+ 		    }
+                    {
+                        isSupportedMobileBrowser()
+                            && <a
+                                onClick = { this._onLaunchWeb }
+                                target = '_top'>
+                                <button className = { downloadButtonClassName }>
+                                    Join from Browser
+                                </button>
+                            </a>
+                    }<br /><br /><br /><br />
+                    <p>
+                       Note: If 'Join from App' doesn't work, please consider updating the app from your app store. Else open your VoxMeet app and enter <br /> { window.location.href } <br /> below 'Enter Room Name'.
+                    </p>
+
+                    { renderPromotionalFooter() }
+                    <DialInSummary
+                        className = 'deep-linking-dial-in'
+                        clickableNumbers = { true }
+                        room = { _room } />
+                </div>
+            </div>
+        ); 
     }
 
     /**

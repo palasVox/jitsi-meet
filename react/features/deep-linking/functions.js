@@ -37,9 +37,10 @@ export function generateDeepLinkingURL() {
 
         return `intent://${url}#Intent;scheme=${appScheme};package=${pkg};end`;
     }
-
+    const appScheme2 = 'org.voxomos.voxmeet';
     // iOS: Replace the protocol part with the app scheme.
-    return href.replace(regex, `${appScheme}:`);
+    //return href.replace(regex, `${appScheme}:`);
+    return href.replace(regex, `${appScheme2}:`);
 }
 
 /**
