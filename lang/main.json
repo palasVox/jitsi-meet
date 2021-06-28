@@ -975,7 +975,7 @@
             "join": "Tap to join",
             "roomname": "Enter room name"
         },
-        "appDescription": "Go ahead, video chat with the whole team. In fact, invite everyone you know. {{app}} is a fully encrypted, 100% open source video conferencing solution that you can use all day, every day, for free — with no account needed.",
+        "appDescription": "Connect from anywhere to everywhere",
         "audioVideoSwitch": {
             "audio": "Voice",
             "video": "Video"
@@ -1007,7 +1007,7 @@
         "sendFeedback": "Send feedback",
         "startMeeting": "Start meeting",
         "terms": "Terms",
-        "title": "Secure, fully featured, and completely free video conferencing",
+        "title": "Video Meets Made Easy",
         "logo":{
            "calendar":"Calendar logo",
            "microsoftLogo":"Microsoft logo",

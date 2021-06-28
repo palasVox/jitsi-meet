@@ -9,7 +9,7 @@
  */
 
 var interfaceConfig = {
-    APP_NAME: 'Jitsi Meet',
+    APP_NAME: 'VoxMeet',
     AUDIO_LEVEL_PRIMARY_COLOR: 'rgba(255,255,255,0.4)',
     AUDIO_LEVEL_SECONDARY_COLOR: 'rgba(255,255,255,0.2)',
 
@@ -53,9 +53,9 @@ var interfaceConfig = {
 
     DEFAULT_BACKGROUND: '#474747',
     DEFAULT_LOCAL_DISPLAY_NAME: 'me',
-    DEFAULT_LOGO_URL: 'images/watermark.svg',
-    DEFAULT_REMOTE_DISPLAY_NAME: 'Fellow Jitster',
-    DEFAULT_WELCOME_PAGE_LOGO_URL: 'images/watermark.svg',
+    DEFAULT_LOGO_URL: 'images/welcome-page/inside-long.png',
+    DEFAULT_REMOTE_DISPLAY_NAME: 'VoxMeet User',
+    DEFAULT_WELCOME_PAGE_LOGO_URL: 'images/watermark_voxmeet.png',
 
     DISABLE_DOMINANT_SPEAKER_INDICATOR: false,
 
@@ -64,7 +64,7 @@ var interfaceConfig = {
     /**
      * If true, notifications regarding joining/leaving are no longer displayed.
      */
-    DISABLE_JOIN_LEAVE_NOTIFICATIONS: false,
+    DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
 
     /**
      * If true, presence status: busy, calling, connected etc. is not displayed.
@@ -104,7 +104,7 @@ var interfaceConfig = {
 
     FILM_STRIP_MAX_HEIGHT: 120,
 
-    GENERATE_ROOMNAMES_ON_WELCOME_PAGE: true,
+    GENERATE_ROOMNAMES_ON_WELCOME_PAGE: false,
 
     /**
      * Hide the logo on the deep linking pages.
@@ -117,10 +117,10 @@ var interfaceConfig = {
     HIDE_INVITE_MORE_HEADER: false,
 
     INITIAL_TOOLBAR_TIMEOUT: 20000,
-    JITSI_WATERMARK_LINK: 'https://jitsi.org',
+    JITSI_WATERMARK_LINK: 'https://www.voxomos.com/',
 
     LANG_DETECTION: true, // Allow i18n to detect the system language
-    LIVE_STREAMING_HELP_LINK: 'https://jitsi.org/live', // Documentation reference for the live streaming feature.
+    LIVE_STREAMING_HELP_LINK: 'http://demo.voxomos.com/VoxMeet/VoxMeetFAQ/VoxMeet_LiveStreaming.pdf', // Documentation reference for the live streaming feature.
     LOCAL_THUMBNAIL_RATIO: 16 / 9, // 16:9
 
     /**
@@ -143,19 +143,19 @@ var interfaceConfig = {
     /**
      * Specify custom URL for downloading android mobile app.
      */
-    MOBILE_DOWNLOAD_LINK_ANDROID: 'https://play.google.com/store/apps/details?id=org.jitsi.meet',
+    MOBILE_DOWNLOAD_LINK_ANDROID: 'https://play.google.com/store/apps/details?id=com.voxomos.voxmeet',
 
     /**
      * Specify custom URL for downloading f droid app.
      */
-    MOBILE_DOWNLOAD_LINK_F_DROID: 'https://f-droid.org/en/packages/org.jitsi.meet/',
+    MOBILE_DOWNLOAD_LINK_F_DROID: 'https://apps.apple.com/in/app/voxmeet/id1523511556',
 
     /**
      * Specify URL for downloading ios mobile app.
      */
     MOBILE_DOWNLOAD_LINK_IOS: 'https://itunes.apple.com/us/app/jitsi-meet/id1165103905',
 
-    NATIVE_APP_NAME: 'Jitsi Meet',
+    NATIVE_APP_NAME: 'VoxMeet',
 
     // Names of browsers which should show a warning stating the current browser
     // has a suboptimal experience. Browsers which are not listed as optimal or
@@ -164,7 +164,7 @@ var interfaceConfig = {
     OPTIMAL_BROWSERS: [ 'chrome', 'chromium', 'firefox', 'nwjs', 'electron', 'safari' ],
 
     POLICY_LOGO: null,
-    PROVIDER_NAME: 'Jitsi',
+    PROVIDER_NAME: 'VoxMeet',
 
     /**
      * If true, will display recent list
@@ -200,7 +200,7 @@ var interfaceConfig = {
      * If indicated some of the error dialogs may point to the support URL for
      * help.
      */
-    SUPPORT_URL: 'https://community.jitsi.org/',
+    SUPPORT_URL: 'https://www.voxomos.com/?page_id=147',
 
     TOOLBAR_ALWAYS_VISIBLE: false,
 
@@ -239,7 +239,7 @@ var interfaceConfig = {
      *
      * @type {boolean}
      */
-    VIDEO_QUALITY_LABEL_DISABLED: false,
+    VIDEO_QUALITY_LABEL_DISABLED: true,
 
     /**
      * How many columns the tile view can expand to. The respected range is
@@ -261,19 +261,19 @@ var interfaceConfig = {
     /**
      * Specify mobile app scheme for opening the app from the mobile browser.
      */
-    // APP_SCHEME: 'org.jitsi.meet',
+    APP_SCHEME: 'com.voxomos.voxmeet',
 
     /**
      * Specify the Android app package name.
      */
-    // ANDROID_APP_PACKAGE: 'org.jitsi.meet',
+    ANDROID_APP_PACKAGE: 'com.voxomos.voxmeet',
 
     /**
      * Override the behavior of some notifications to remain displayed until
      * explicitly dismissed through a user action. The value is how long, in
      * milliseconds, those notifications should remain displayed.
      */
-    // ENFORCE_NOTIFICATION_AUTO_DISMISS_TIMEOUT: 15000,
+    ENFORCE_NOTIFICATION_AUTO_DISMISS_TIMEOUT: 15000,
 
     // List of undocumented settings
     /**
