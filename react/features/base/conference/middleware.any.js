@@ -22,6 +22,7 @@ import {
     PARTICIPANT_UPDATED,
     PIN_PARTICIPANT
 } from '../participants';
+import { SET_DOCUMENT_EDITING_STATUS } from '../../etherpad';
 import { MiddlewareRegistry } from '../redux';
 import { TRACK_ADDED, TRACK_REMOVED } from '../tracks';
 
