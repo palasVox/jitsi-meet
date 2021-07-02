@@ -322,6 +322,14 @@ UI.notifyConnectionFailed = function(stropheErrorMsg) {
 };
 
 
+UI.notifySomeoneIsScreenSharing = function(name) {
+    messageHandler.showError({
+        hideErrorSupportLink: true,
+        descriptionKey: name + ' is already Screensharing',
+        titleKey: name + ' is already Screensharing'
+    });
+};
+
 /**
  * Notify user that maximum users limit has been reached.
  */

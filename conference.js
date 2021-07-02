@@ -1837,6 +1837,13 @@ export default {
      * @private
      */
     _switchToScreenSharing(options = {}) {
+        var obj = APP.store.getState()['features/base/tracks'].filter(tr => tr.videoType === 'desktop');
+        var isSomeoneScreenSharing = !(Object.keys(obj).length === 0);
+        if (isSomeoneScreenSharing) {
+		var name = getDisplayName(obj[0]['participantId']);
+                APP.UI.notifySomeoneIsScreenSharing(name);
+                return Promise.reject('Someone is already sharing');
+        }
         if (this.videoSwitchInProgress) {
             return Promise.reject('Switch in progress.');
         }
@@ -1845,6 +1852,13 @@ export default {
 
         return this._createDesktopTrack(options)
             .then(async streams => {
+	        var obj = APP.store.getState()['features/base/tracks'].filter(tr => tr.videoType === 'desktop');
+        	var isSomeoneScreenSharing = !(Object.keys(obj).length === 0);
+        	if (isSomeoneScreenSharing) {
+                	var name = getDisplayName(obj[0]['participantId']);
+                	APP.UI.notifySomeoneIsScreenSharing(name);
+                	return Promise.reject('Someone is already sharing');
+        	}
                 let desktopVideoStream = streams.find(stream => stream.getType() === MEDIA_TYPE.VIDEO);
 
                 this._desktopAudioStream = streams.find(stream => stream.getType() === MEDIA_TYPE.AUDIO);
