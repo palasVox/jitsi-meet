@@ -494,6 +494,12 @@ export class VideoContainer extends LargeContainer {
             transform: flipX ? 'scaleX(-1)' : 'none'
         });
 
+        if (this.isScreenSharing() && stream.isLocal()) {
+                $('#largeVideoWrapperBackground').css('visibility', 'visible');
+        } else {
+                $('#largeVideoWrapperBackground').css('visibility', 'hidden');
+        }
+
         this._updateBackground();
     }
 
@@ -509,7 +515,7 @@ export class VideoContainer extends LargeContainer {
         this.$video.css({
             transform: this.localFlipX ? 'scaleX(-1)' : 'none'
         });
-
+	
         this._updateBackground();
     }
 

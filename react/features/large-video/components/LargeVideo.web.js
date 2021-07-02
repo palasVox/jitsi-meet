@@ -8,10 +8,16 @@ import { setColorAlpha } from '../../base/util';
 import { fetchCustomBrandingData } from '../../dynamic-branding';
 import { SharedVideo } from '../../shared-video/components/web';
 import { Captions } from '../../subtitles/';
+import { toggleScreensharing } from '../../base/tracks';
+import { getLocalParticipant } from '../../base/participants';
 
 declare var interfaceConfig: Object;
 
 type Props = {
+    /**
+     * The redux representation of the local participant.
+     */
+    _localParticipant: Object,
 
     /**
      * The alpha(opacity) of the background
@@ -42,7 +48,9 @@ type Props = {
      * Used to determine the value of the autoplay attribute of the underlying
      * video element.
      */
-    _noAutoPlayVideo: boolean
+    _noAutoPlayVideo: boolean,
+
+    dispatch: Function,
 }
 
 /**
@@ -57,8 +65,17 @@ class LargeVideo extends Component<Props> {
      *
      * @inheritdoc
      */
+
+    constructor(props: Props) {
+        super(props);
+    }
+
     componentDidMount() {
         this.props._fetchCustomBrandingData();
+    }
+
+    _doToggleScreenshare = () => {
+        this.props.dispatch(toggleScreensharing());
     }
 
     /**
@@ -74,6 +91,14 @@ class LargeVideo extends Component<Props> {
         } = this.props;
         const style = this._getCustomSyles();
         const className = `videocontainer${_isChatOpen ? ' shift-right' : ''}`;
+        const { _localParticipant } = this.props;
+	let displayName;
+
+	if (_localParticipant && _localParticipant.name) {
+		displayName = _localParticipant.name;
+	} else {
+	        displayName = interfaceConfig.DEFAULT_LOCAL_DISPLAY_NAME;
+	}
 
         return (
             <div
@@ -105,6 +130,17 @@ class LargeVideo extends Component<Props> {
                     <div
                         id = 'largeVideoWrapper'
                         role = 'figure' >
+		        <div id = 'largeVideoWrapperBackground'>
+				<div className = 'largeVideoWrapperBackgroundBox'>
+				<img src='../../../images/presenting_logo.png' />
+				<p>{ displayName } is  currently presenting</p>
+				<button
+				id = 'stopPresentingButton'
+				onClick = { this._doToggleScreenshare }>
+				Stop Presenting
+				</button>
+				</div>
+			</div>
                         <video
                             autoPlay = { !_noAutoPlayVideo }
                             id = 'largeVideo'
@@ -163,12 +199,14 @@ function _mapStateToProps(state) {
         _customBackgroundColor: backgroundColor,
         _customBackgroundImageUrl: backgroundImageUrl,
         _isChatOpen: isChatOpen,
-        _noAutoPlayVideo: testingConfig?.noAutoPlayVideo
+        _noAutoPlayVideo: testingConfig?.noAutoPlayVideo,
+	_localParticipant: getLocalParticipant(state),
     };
 }
 
-const _mapDispatchToProps = {
-    _fetchCustomBrandingData: fetchCustomBrandingData
-};
+const _mapDispatchToProps = dispatch => ({
+    _fetchCustomBrandingData: fetchCustomBrandingData,
+    dispatch
+});
 
 export default connect(_mapStateToProps, _mapDispatchToProps)(LargeVideo);
