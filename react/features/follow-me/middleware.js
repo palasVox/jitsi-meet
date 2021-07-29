@@ -51,6 +51,8 @@ let nextOnStageTimeout;
  */
 let nextOnStageTimer = 0;
 
+let etherpadTimeout;
+let etherpadTimer = 0;
 /**
  * Represents "Follow Me" feature which enables a moderator to (partially)
  * control the user experience/interface (e.g. filmstrip visibility) of (other)
@@ -139,17 +141,38 @@ function _onFollowMeCommand(attributes = {}, id, store) {
         store.dispatch(setTileView(attributes.tileViewEnabled === 'true'));
     }
 
+    console.log("followme", oldState, "attributes", attributes);
+
     // For now gate etherpad checks behind a web-app check to be extra safe
     // against calling a web-app global.
     if (typeof APP !== 'undefined'
         && oldState.sharedDocumentVisible !== attributes.sharedDocumentVisible) {
-        const isEtherpadVisible = attributes.sharedDocumentVisible === 'true';
-        const documentManager = APP.UI.getSharedDocumentManager();
+        
 
-        if (documentManager
-                && isEtherpadVisible !== state['features/etherpad'].editing) {
-            documentManager.toggleEtherpad();
-        }
+        const isEtherpadVisible = attributes.sharedDocumentVisible === 'true';
+        
+
+        
+
+        // console.log("followme", isEtherpadVisible, state['features/etherpad'].editing, documentManager);
+        // if (typeof documentManager === 'undefined'){
+        //     if (isEtherpadVisible !== state['features/etherpad'].editing) {
+
+        //     }              
+        // } else {
+        //     if (documentManager
+        //             && isEtherpadVisible !== state['features/etherpad'].editing) {
+        //         console.log("followme", "togglingetherpad");
+        //         documentManager.toggleEtherpad();
+        //     }
+        // }
+
+        // const documentManager = APP.UI.getSharedDocumentManager();
+        // if (documentManager
+        //     && isEtherpadVisible !== state['features/etherpad'].editing) {
+        // documentManager.toggleEtherpad();
+        // }
+        _handleEtherPad(isEtherpadVisible, state);
     }
 
     const pinnedParticipant = getPinnedParticipant(state);
@@ -161,6 +184,30 @@ function _onFollowMeCommand(attributes = {}, id, store) {
         _pinVideoThumbnailById(store, idOfParticipantToPin);
     } else if (typeof idOfParticipantToPin === 'undefined' && pinnedParticipant) {
         store.dispatch(pinParticipant(null));
+    }
+}
+
+
+function _handleEtherPad(isEtherpadVisible,state) {
+    const documentManager = APP.UI.getSharedDocumentManager();
+    if (documentManager) {
+        clearTimeout(etherpadTimeout);
+        etherpadTimer = 0;
+        if (isEtherpadVisible !== state['features/etherpad'].editing){
+        documentManager.toggleEtherpad();
+        }
+    } else {
+        etherpadTimeout = setTimeout(() => {
+            if (etherpadTimer > _FOLLOW_ME_RECEIVED_TIMEOUT) {
+                etherpadTimer = 0;
+
+                return;
+            }
+
+            etherpadTimer++;
+
+            _handleEtherPad(isEtherpadVisible,state);
+        }, 1000);
     }
 }
 

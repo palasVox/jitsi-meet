@@ -199,6 +199,21 @@ export default class LargeVideoManager {
         const isUserSwitch = this.newStreamData.id !== container.id;
         const preUpdate = isUserSwitch ? container.hide() : Promise.resolve();
 
+        // let preUpdate;
+        // if (isUserSwitch){
+            
+        //     if (typeof container.iframe === 'undefined'){
+        //         preUpdate = container.hide();
+        //         console.log("followme", "Case1");
+        //     } else {
+        //         preUpdate = container.hide(false);
+        //         console.log("followme", "Case2");
+        //     }
+        // } else {
+        //     preUpdate =  Promise.resolve();
+        //     console.log("followme", "Case3");
+        // }
+
         preUpdate.then(() => {
             const { id, stream, videoType, resolve } = this.newStreamData;
 

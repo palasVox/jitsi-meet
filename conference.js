@@ -1977,6 +1977,7 @@ export default {
     /**
      * Setup interaction between conference and UI.
      */
+
     _setupListeners() {
         // add local streams when joined to the conference
         room.on(JitsiConferenceEvents.CONFERENCE_JOINED, () => {
