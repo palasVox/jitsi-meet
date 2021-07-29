@@ -42,6 +42,8 @@ export const KICK_PARTICIPANT = 'KICK_PARTICIPANT';
  */
 export const MUTE_REMOTE_PARTICIPANT = 'MUTE_REMOTE_PARTICIPANT';
 
+export const UNMUTE_REMOTE_PARTICIPANT = 'UNMUTE_REMOTE_PARTICIPANT';
+
 /**
  * Create an action for when the local participant's display name is updated.
  *

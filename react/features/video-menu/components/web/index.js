@@ -7,6 +7,7 @@ export { default as KickRemoteParticipantDialog } from './KickRemoteParticipantD
 export { default as MuteButton } from './MuteButton';
 export { default as MuteVideoButton } from './MuteVideoButton';
 export { default as MuteEveryoneDialog } from './MuteEveryoneDialog';
+export { default as UnMuteEveryoneDialog } from './UnMuteEveryoneDialog';
 export { default as KickEveryoneDialog } from './KickEveryoneDialog';
 export { default as MuteEveryonesVideoDialog } from './MuteEveryonesVideoDialog';
 export { default as MuteEveryoneElseButton } from './MuteEveryoneElseButton';
@@ -19,3 +20,5 @@ export { default as VideoMenu } from './VideoMenu';
 export { default as RemoteVideoMenuTriggerButton } from './RemoteVideoMenuTriggerButton';
 export { default as LocalVideoMenuTriggerButton } from './LocalVideoMenuTriggerButton';
 export { default as VolumeSlider } from './VolumeSlider';
+export { default as UnMuteButton } from './UnMuteButton';
+export { default as UnMuteRemoteParticipantDialog } from './UnMuteRemoteParticipantDialog';

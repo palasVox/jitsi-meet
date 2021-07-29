@@ -20,6 +20,7 @@ import {
     KICK_PARTICIPANT,
     LOCAL_PARTICIPANT_RAISE_HAND,
     MUTE_REMOTE_PARTICIPANT,
+    UNMUTE_REMOTE_PARTICIPANT,
     PARTICIPANT_DISPLAY_NAME_CHANGED,
     PARTICIPANT_JOINED,
     PARTICIPANT_LEFT,
@@ -138,6 +139,13 @@ MiddlewareRegistry.register(store => next => action => {
         const { conference } = store.getState()['features/base/conference'];
 
         conference.muteParticipant(action.id, action.mediaType);
+        break;
+    }
+
+    // mute-unmute-XX
+    case UNMUTE_REMOTE_PARTICIPANT: {
+        const { conference } = store.getState()['features/base/conference'];
+        conference.unMuteParticipant(action.id, action.mediaType);
         break;
     }
 

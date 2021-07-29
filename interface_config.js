@@ -204,7 +204,7 @@ var interfaceConfig = {
      */
     SUPPORT_URL: 'https://www.voxomos.com/?page_id=147',
 
-    TOOLBAR_ALWAYS_VISIBLE: false,
+    TOOLBAR_ALWAYS_VISIBLE: true,
 
     /**
      * DEPRECATED!
@@ -215,7 +215,7 @@ var interfaceConfig = {
     //     'fodeviceselection', 'hangup', 'profile', 'chat', 'recording',
     //     'livestreaming', 'etherpad', 'sharedvideo', 'settings', 'raisehand',
     //     'videoquality', 'filmstrip', 'invite', 'feedback', 'stats', 'shortcuts',
-    //     'tileview', 'select-background', 'download', 'help', 'mute-everyone', 'mute-video-everyone', 'security'
+    //     'tileview', 'select-background', 'download', 'help', 'mute-everyone', 'unmute-everyone', 'mute-video-everyone', 'security'
     // ],
 
     TOOLBAR_TIMEOUT: 4000,
@@ -275,7 +275,7 @@ var interfaceConfig = {
      * explicitly dismissed through a user action. The value is how long, in
      * milliseconds, those notifications should remain displayed.
      */
-    ENFORCE_NOTIFICATION_AUTO_DISMISS_TIMEOUT: 15000,
+    ENFORCE_NOTIFICATION_AUTO_DISMISS_TIMEOUT: 1000,
 
     // List of undocumented settings
     /**
