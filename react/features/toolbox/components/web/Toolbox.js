@@ -1211,7 +1211,7 @@ class Toolbox extends Component<Props> {
     _startLocalVideoRecording(){
 
 
-        var options = this.recorder.getSupoortedFormats()[4];
+        var options = this.recorder.getSupoortedFormats()[3];
         console.log(options);
         this.recorder.startRecording(options, function() {
         });
@@ -1219,18 +1219,18 @@ class Toolbox extends Component<Props> {
 
     _stopLocalVideoRecording(){
         this.recorder.stopRecording(function(blob) {
-            console.log(blob.size, blob);
-            var url = URL.createObjectURL(blob);
+            // console.log(blob.size, blob);
+            // var url = URL.createObjectURL(blob);
 
     
-            var a = $("<a>")
-                .attr("href", url)
-                .attr("download", "vid.mp4")
-                .appendTo("body");
+            // var a = $("<a>")
+            //     .attr("href", url)
+            //     .attr("download", "vid.mp4")
+            //     .appendTo("body");
     
-            a[0].click();
+            // a[0].click();
     
-            a.remove();
+            // a.remove();
         });
     }
     /**
