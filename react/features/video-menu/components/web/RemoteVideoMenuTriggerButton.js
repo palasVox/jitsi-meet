@@ -17,6 +17,7 @@ import { REMOTE_CONTROL_MENU_STATES } from './RemoteControlButton';
 import {
     GrantModeratorButton,
     MuteButton,
+    MuteButtonSoft,
     UnMuteButton,
     MuteVideoButton,
     KickButton,
@@ -173,6 +174,11 @@ class RemoteVideoMenuTriggerButton extends Component<Props> {
                 buttons.push(
                     <MuteButton
                         key = 'mute'
+                        participantID = { participantID } />
+                );
+                buttons.push(
+                    <MuteButtonSoft
+                        key = 'mute-soft'
                         participantID = { participantID } />
                 );
                 buttons.push(

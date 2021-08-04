@@ -158,7 +158,10 @@ function _mapStateToProps(state): Object {
     	_disabled = false;
 	//_disabled = state['features/base/config'].startSilent;
     } else {
-    	_disabled = state['features/base/conference'].conference.isMutedByFocus;
+    	//_disabled = state['features/base/conference'].conference.isMutedByFocus 
+	_disabled = (state['features/base/conference'].conference.isSoftMutedByFocus) == '2' ? true : false;
+        //console.log("here", state['features/base/conference'].conference.isMutedByFocus);
+	console.log("here", state['features/base/conference'].conference.isSoftMutedByFocus);
     }
     const enabledFlag = getFeatureFlag(state, AUDIO_MUTE_BUTTON_ENABLED, true);
 

@@ -21,6 +21,7 @@ import {
 import {
     getLocalParticipant,
     muteRemoteParticipant,
+    muteRemoteParticipantSoft,
     unMuteRemoteParticipant,
     kickRemoteParticipant
 } from '../base/participants';
@@ -79,6 +80,18 @@ export function muteRemote(participantId: string, mediaType: MEDIA_TYPE) {
         }
         sendAnalytics(createRemoteMuteConfirmedEvent(participantId, mediaType));
         dispatch(muteRemoteParticipant(participantId, mediaType));
+    };
+}
+
+export function muteRemoteSoft(participantId: string, mediaType: MEDIA_TYPE) {
+    return (dispatch: Dispatch<any>) => {
+        if (mediaType !== MEDIA_TYPE.AUDIO && mediaType !== MEDIA_TYPE.VIDEO) {
+            logger.error(`Unsupported media type: ${mediaType}`);
+
+            return;
+        }
+        sendAnalytics(createRemoteMuteConfirmedEvent(participantId, mediaType));
+        dispatch(muteRemoteParticipantSoft(participantId, mediaType));
     };
 }
 
