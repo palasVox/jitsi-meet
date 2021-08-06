@@ -204,7 +204,7 @@ var interfaceConfig = {
      */
     SUPPORT_URL: 'https://www.voxomos.com/?page_id=147',
 
-    TOOLBAR_ALWAYS_VISIBLE: false,
+    TOOLBAR_ALWAYS_VISIBLE: true,
 
     /**
      * DEPRECATED!

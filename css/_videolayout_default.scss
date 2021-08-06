@@ -80,7 +80,7 @@
 
         .indicator-container {
             display: inline-block;
-            float: left;
+            float: right;
             pointer-events: all;
         }
     }
@@ -283,19 +283,23 @@
 .videocontainer .editdisplayname {
     display: inline-block;
     position: absolute;
-    left: 10%;
-    width: 80%;
-    top: 50%;
+    //left: 10%;
+    left: 10px;
+    bottom: 0%;
+    max-width: 60%;
     @include transform(translateY(-40%));
-    color: $participantNameColor;
-    text-align: center;
+    background-color: #5F5F5F;
+    color: white;
+    text-align: left;
     text-overflow: ellipsis;
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 100;
+    font-family: Monteserrat;
     overflow: hidden;
     white-space: nowrap;
-    line-height: $thumbnailToolbarHeight;
+    line-height: 15px;
     z-index: $zindex2;
+    border-radius: 2px;
 }
 
 #alwaysOnTop .displayname {
@@ -661,7 +665,7 @@
     }
 
     .displayNameContainer {
-        visibility: hidden;
+        visibility: visible;
     }
 
     .videocontainer__hoverOverlay {
@@ -697,7 +701,7 @@
     }
 
     .displayNameContainer {
-        visibility: hidden;
+        visibility: visible;
     }
 
     .videocontainer__hoverOverlay {

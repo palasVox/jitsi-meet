@@ -164,7 +164,7 @@ class LargeVideo extends Component<Props> {
         const styles = {};
         const { _customBackgroundColor, _customBackgroundImageUrl } = this.props;
 
-        styles.backgroundColor = _customBackgroundColor || interfaceConfig.DEFAULT_BACKGROUND;
+        /*styles.backgroundColor = _customBackgroundColor || interfaceConfig.DEFAULT_BACKGROUND;
 
         if (this.props._backgroundAlpha !== undefined) {
             const alphaColor = setColorAlpha(styles.backgroundColor, this.props._backgroundAlpha);
@@ -175,7 +175,9 @@ class LargeVideo extends Component<Props> {
         if (_customBackgroundImageUrl) {
             styles.backgroundImage = `url(${_customBackgroundImageUrl})`;
             styles.backgroundSize = 'cover';
-        }
+        }*/
+	
+	styles.backgroundImage = 'radial-gradient(#004F7B, #141414, #000000)';
 
         return styles;
     }
