@@ -32,7 +32,8 @@ import JitsiMeetJS from '../../../base/lib-jitsi-meet';
 import {
     getLocalParticipant,
     getParticipants,
-    raiseHand
+    raiseHand,
+    PARTICIPANT_ROLE
 } from '../../../base/participants';
 import { connect } from '../../../base/redux';
 import { OverflowMenuItem } from '../../../base/toolbox/components';
@@ -236,6 +237,8 @@ type Props = {
      */
      _virtualSource: Object,
 
+     _isModerator: boolean,
+
     /**
      * Invoked to active other features of the app.
      */
@@ -291,6 +294,14 @@ class Toolbox extends Component<Props> {
         this._onToolbarOpenLocalRecordingInfoDialog = this._onToolbarOpenLocalRecordingInfoDialog.bind(this);
         this._onShortcutToggleTileView = this._onShortcutToggleTileView.bind(this);
         this._onEscKey = this._onEscKey.bind(this);
+        this._startLocalVideoRecording = this._startLocalVideoRecording.bind(this);
+        this._stopLocalVideoRecording = this._stopLocalVideoRecording.bind(this);
+
+        if(typeof RecordRTC_Extension === 'undefined') {
+            alert('Voxmeet chrome extension is either disabled or not installed.');
+        }
+
+        this.recorder = new RecordRTC_Extension();
     }
 
     /**
@@ -1105,7 +1116,7 @@ class Toolbox extends Component<Props> {
                     key = 'shareaudio'
                     onClick = { this._onToolbarToggleShareAudio }
                     text = { t('toolbar.shareaudio') } />,
-            this.props._shouldShowButton('etherpad')
+            this.props._shouldShowButton('etherpad') && (this.props._isModerator)
                 && <SharedDocumentButton
                     key = 'etherpad'
                     showLabel = { true } />,
@@ -1181,10 +1192,47 @@ class Toolbox extends Component<Props> {
             this.props._shouldShowButton('help')
                 && <HelpButton
                     key = 'help'
-                    showLabel = { true } />
+                    showLabel = { true } />,
+            <OverflowMenuItem
+                accessibilityLabel = { t('toolbar.accessibilityLabel.feedback') }
+                icon = { IconFeedback }
+                key = 'localvideorecordingstart'
+                onClick = { this._startLocalVideoRecording }
+                text = 'Start Local Recording' />,
+            <OverflowMenuItem
+                accessibilityLabel = { t('toolbar.accessibilityLabel.feedback') }
+                icon = { IconFeedback }
+                key = 'localvideorecordingstop'
+                onClick = { this._stopLocalVideoRecording }
+                text = 'Stop Local Recording' />                
         ];
     }
 
+    _startLocalVideoRecording(){
+
+
+        var options = this.recorder.getSupoortedFormats()[3];
+        console.log(options);
+        this.recorder.startRecording(options, function() {
+        });
+    }
+
+    _stopLocalVideoRecording(){
+        this.recorder.stopRecording(function(blob) {
+            // console.log(blob.size, blob);
+            // var url = URL.createObjectURL(blob);
+
+    
+            // var a = $("<a>")
+            //     .attr("href", url)
+            //     .attr("download", "vid.mp4")
+            //     .appendTo("body");
+    
+            // a[0].click();
+    
+            // a.remove();
+        });
+    }
     /**
      * Returns the buttons to be displayed in main or the overflow menu.
      *
@@ -1424,6 +1472,8 @@ function _mapStateToProps(state) {
         desktopSharingDisabledTooltipKey = 'dialog.shareYourScreenDisabled';
     }
 
+    const isModerator = localParticipant.role === PARTICIPANT_ROLE.MODERATOR;
+
     return {
         _chatOpen: state['features/chat'].isOpen,
         _clientWidth: clientWidth,
@@ -1449,7 +1499,8 @@ function _mapStateToProps(state) {
         _screensharing: (localVideo && localVideo.videoType === 'desktop') || isScreenAudioShared(state),
         _shouldShowButton: buttonName => isToolbarButtonEnabled(buttonName)(state),
         _visible: isToolboxVisible(state),
-        _visibleButtons: getToolbarButtons(state)
+        _visibleButtons: getToolbarButtons(state),
+        _isModerator : isModerator
     };
 }
 

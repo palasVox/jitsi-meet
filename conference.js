@@ -90,7 +90,8 @@ import {
     participantPresenceChanged,
     participantRoleChanged,
     participantUpdated,
-    updateRemoteParticipantFeatures
+    updateRemoteParticipantFeatures,
+    isLocalParticipantModerator
 } from './react/features/base/participants';
 import {
     getUserSelectedCameraDeviceId,
@@ -134,6 +135,7 @@ import { AudioMixerEffect } from './react/features/stream-effects/audio-mixer/Au
 import { createPresenterEffect } from './react/features/stream-effects/presenter';
 import { endpointMessageReceived } from './react/features/subtitles';
 import UIEvents from './service/UI/UIEvents';
+import { setFollowMe } from './react/features/base/conference';
 
 const logger = Logger.getLogger(__filename);
 
@@ -1977,6 +1979,7 @@ export default {
     /**
      * Setup interaction between conference and UI.
      */
+
     _setupListeners() {
         // add local streams when joined to the conference
         room.on(JitsiConferenceEvents.CONFERENCE_JOINED, () => {
@@ -2062,6 +2065,20 @@ export default {
             } else {
                 APP.store.dispatch(participantRoleChanged(id, role));
             }
+
+            const participants_list  = APP.store.getState()['features/base/participants'];
+
+            for (const participant of participants_list) {
+                if (participant.role == 'moderator'){
+                //APP.store.dispatch(pinParticipant(participant.id));
+                    if (isLocalParticipantModerator(APP.store.getState())){
+                        console.log("setting follow me");
+                        APP.store.dispatch(setFollowMe(true));	
+                    }
+                break;
+                }
+            }
+     
         });
 
         room.on(JitsiConferenceEvents.TRACK_ADDED, track => {
