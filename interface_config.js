@@ -150,12 +150,12 @@ var interfaceConfig = {
     /**
      * Specify custom URL for downloading f droid app.
      */
-    MOBILE_DOWNLOAD_LINK_F_DROID: 'https://apps.apple.com/in/app/voxmeet/id1523511556',
+    MOBILE_DOWNLOAD_LINK_F_DROID: 'https://play.google.com/store/apps/details?id=com.voxomos.voxmeet',
 
     /**
      * Specify URL for downloading ios mobile app.
      */
-    MOBILE_DOWNLOAD_LINK_IOS: 'https://itunes.apple.com/us/app/jitsi-meet/id1165103905',
+    MOBILE_DOWNLOAD_LINK_IOS: 'https://apps.apple.com/in/app/voxmeet/id1523511556',
 
     NATIVE_APP_NAME: 'VoxMeet',
 
@@ -275,7 +275,7 @@ var interfaceConfig = {
      * explicitly dismissed through a user action. The value is how long, in
      * milliseconds, those notifications should remain displayed.
      */
-    ENFORCE_NOTIFICATION_AUTO_DISMISS_TIMEOUT: 15000,
+    ENFORCE_NOTIFICATION_AUTO_DISMISS_TIMEOUT: 1000,
 
     // List of undocumented settings
     /**

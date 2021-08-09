@@ -228,6 +228,7 @@
 #largeVideoContainer {
     height: 100%;
     width: 100%;
+    background-size: cover;
 }
 
 #largeVideoWrapper {
@@ -286,7 +287,7 @@
     //left: 10%;
     left: 10px;
     bottom: 0%;
-    max-width: 60%;
+    max-width: 45%;
     @include transform(translateY(-40%));
     background-color: #5F5F5F;
     color: white;
