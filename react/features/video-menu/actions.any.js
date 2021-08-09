@@ -21,6 +21,8 @@ import {
 import {
     getLocalParticipant,
     muteRemoteParticipant,
+    muteRemoteParticipantSoft,
+    unMuteRemoteParticipant,
     kickRemoteParticipant
 } from '../base/participants';
 
@@ -81,6 +83,32 @@ export function muteRemote(participantId: string, mediaType: MEDIA_TYPE) {
     };
 }
 
+export function muteRemoteSoft(participantId: string, mediaType: MEDIA_TYPE) {
+    return (dispatch: Dispatch<any>) => {
+        if (mediaType !== MEDIA_TYPE.AUDIO && mediaType !== MEDIA_TYPE.VIDEO) {
+            logger.error(`Unsupported media type: ${mediaType}`);
+
+            return;
+        }
+        sendAnalytics(createRemoteMuteConfirmedEvent(participantId, mediaType));
+        dispatch(muteRemoteParticipantSoft(participantId, mediaType));
+    };
+}
+
+export function unMuteRemote(participantId: string, mediaType: MEDIA_TYPE) {
+    return (dispatch: Dispatch<any>) => {
+
+        if (mediaType !== MEDIA_TYPE.AUDIO && mediaType !== MEDIA_TYPE.VIDEO) {
+            logger.error(`Unsupported media type: ${mediaType}`);
+
+            return;
+        }
+
+        //sendAnalytics(createRemoteMuteConfirmedEvent(participantId));
+        dispatch(unMuteRemoteParticipant(participantId, mediaType));
+    };
+}
+
 export function kickRemote(participantId: string) {
     return (dispatch: Dispatch<any>) => {
         //sendAnalytics(createRemoteMuteConfirmedEvent(participantId));
@@ -105,6 +133,22 @@ export function muteAllParticipants(exclude: Array<string>, mediaType: MEDIA_TYP
         participantIds
             .filter(id => !exclude.includes(id))
             .map(id => id === localId ? muteLocal(true, mediaType) : muteRemote(id, mediaType))
+            .map(dispatch);
+        /* eslint-enable no-confusing-arrow */
+    };
+}
+
+export function unmuteAllParticipants(exclude: Array<string>, mediaType: MEDIA_TYPE) {
+    return (dispatch: Dispatch<any>, getState: Function) => {
+        const state = getState();
+        const localId = getLocalParticipant(state).id;
+        const participantIds = state['features/base/participants']
+            .map(p => p.id);
+
+        /* eslint-disable no-confusing-arrow */
+        participantIds
+            .filter(id => !exclude.includes(id))
+            .map(id => id === localId ? muteLocal(false, mediaType) : unMuteRemote(id, mediaType))
             .map(dispatch);
         /* eslint-enable no-confusing-arrow */
     };

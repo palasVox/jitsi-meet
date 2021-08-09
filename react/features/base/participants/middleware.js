@@ -20,6 +20,8 @@ import {
     KICK_PARTICIPANT,
     LOCAL_PARTICIPANT_RAISE_HAND,
     MUTE_REMOTE_PARTICIPANT,
+    MUTE_REMOTE_PARTICIPANT_SOFT,
+    UNMUTE_REMOTE_PARTICIPANT,
     PARTICIPANT_DISPLAY_NAME_CHANGED,
     PARTICIPANT_JOINED,
     PARTICIPANT_LEFT,
@@ -135,9 +137,25 @@ MiddlewareRegistry.register(store => next => action => {
     }
 
     case MUTE_REMOTE_PARTICIPANT: {
+        console.log("here", "MUTE_REMOTE_PARTICIPANT");
         const { conference } = store.getState()['features/base/conference'];
 
         conference.muteParticipant(action.id, action.mediaType);
+        break;
+    }
+
+    case MUTE_REMOTE_PARTICIPANT_SOFT: {
+	console.log("here", "MUTE_REMOTE_PARTICIPANT_SOFT");
+        const { conference } = store.getState()['features/base/conference'];
+
+        conference.muteParticipantSoft(action.id, action.mediaType);
+        break;
+    }
+
+    // mute-unmute-XX
+    case UNMUTE_REMOTE_PARTICIPANT: {
+        const { conference } = store.getState()['features/base/conference'];
+        conference.unMuteParticipant(action.id, action.mediaType);
         break;
     }
 

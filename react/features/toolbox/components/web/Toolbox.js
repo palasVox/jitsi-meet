@@ -90,6 +90,7 @@ import DownloadButton from '../DownloadButton';
 import HangupButton from '../HangupButton';
 import HelpButton from '../HelpButton';
 import MuteEveryoneButton from '../MuteEveryoneButton';
+import UnMuteEveryoneButton from '../UnMuteEveryoneButton';
 import MuteEveryonesVideoButton from '../MuteEveryonesVideoButton';
 import KickEveryoneButton from './KickEveryoneButton';
 import AudioSettingsButton from './AudioSettingsButton';
@@ -1087,6 +1088,10 @@ class Toolbox extends Component<Props> {
             this.props._shouldShowButton('mute-everyone')
                 && <MuteEveryoneButton
                     key = 'mute-everyone'
+                    showLabel = { true } />,
+            this.props._shouldShowButton('unmute-everyone')
+                && <UnMuteEveryoneButton
+                    key = 'unmute-everyone'
                     showLabel = { true } />,
             this.props._shouldShowButton('kick-everyone')
                 && <KickEveryoneButton

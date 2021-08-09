@@ -9,6 +9,8 @@ import {
     KICK_PARTICIPANT,
     LOCAL_PARTICIPANT_RAISE_HAND,
     MUTE_REMOTE_PARTICIPANT,
+    MUTE_REMOTE_PARTICIPANT_SOFT,
+    UNMUTE_REMOTE_PARTICIPANT,
     PARTICIPANT_ID_CHANGED,
     PARTICIPANT_JOINED,
     PARTICIPANT_KICKED,
@@ -210,6 +212,22 @@ export function muteRemoteParticipant(id, mediaType) {
     };
 }
 
+export function muteRemoteParticipantSoft(id, mediaType) {
+    return {
+        type: MUTE_REMOTE_PARTICIPANT_SOFT,
+        id,
+        mediaType
+    };
+}
+
+// mute-unmute-XX
+export function unMuteRemoteParticipant(id, mediaType) {
+    return {
+        type: UNMUTE_REMOTE_PARTICIPANT,
+        id,
+	mediaType
+    };
+}
  	
 export function kickRemoteParticipant(id) {
     return {
