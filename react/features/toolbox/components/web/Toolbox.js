@@ -294,14 +294,14 @@ class Toolbox extends Component<Props> {
         this._onToolbarOpenLocalRecordingInfoDialog = this._onToolbarOpenLocalRecordingInfoDialog.bind(this);
         this._onShortcutToggleTileView = this._onShortcutToggleTileView.bind(this);
         this._onEscKey = this._onEscKey.bind(this);
-        this._startLocalVideoRecording = this._startLocalVideoRecording.bind(this);
-        this._stopLocalVideoRecording = this._stopLocalVideoRecording.bind(this);
+        // this._startLocalVideoRecording = this._startLocalVideoRecording.bind(this);
+        // this._stopLocalVideoRecording = this._stopLocalVideoRecording.bind(this);
 
-        if(typeof RecordRTC_Extension === 'undefined') {
-            alert('Voxmeet chrome extension is either disabled or not installed.');
-        }
+        // if(typeof RecordRTC_Extension === 'undefined') {
+        //     alert('Voxmeet chrome extension is either disabled or not installed.');
+        // }
 
-        this.recorder = new RecordRTC_Extension();
+        // this.recorder = new RecordRTC_Extension();
     }
 
     /**
@@ -1192,47 +1192,47 @@ class Toolbox extends Component<Props> {
             this.props._shouldShowButton('help')
                 && <HelpButton
                     key = 'help'
-                    showLabel = { true } />,
-            <OverflowMenuItem
-                accessibilityLabel = { t('toolbar.accessibilityLabel.feedback') }
-                icon = { IconFeedback }
-                key = 'localvideorecordingstart'
-                onClick = { this._startLocalVideoRecording }
-                text = 'Start Local Recording' />,
-            <OverflowMenuItem
-                accessibilityLabel = { t('toolbar.accessibilityLabel.feedback') }
-                icon = { IconFeedback }
-                key = 'localvideorecordingstop'
-                onClick = { this._stopLocalVideoRecording }
-                text = 'Stop Local Recording' />                
+                    showLabel = { true } />
+            // <OverflowMenuItem
+            //     accessibilityLabel = { t('toolbar.accessibilityLabel.feedback') }
+            //     icon = { IconFeedback }
+            //     key = 'localvideorecordingstart'
+            //     onClick = { this._startLocalVideoRecording }
+            //     text = 'Start Local Recording' />,
+            // <OverflowMenuItem
+            //     accessibilityLabel = { t('toolbar.accessibilityLabel.feedback') }
+            //     icon = { IconFeedback }
+            //     key = 'localvideorecordingstop'
+            //     onClick = { this._stopLocalVideoRecording }
+            //     text = 'Stop Local Recording' />                
         ];
     }
 
-    _startLocalVideoRecording(){
+    // _startLocalVideoRecording(){
 
 
-        var options = this.recorder.getSupoortedFormats()[3];
-        console.log(options);
-        this.recorder.startRecording(options, function() {
-        });
-    }
+    //     var options = this.recorder.getSupoortedFormats()[3];
+    //     console.log(options);
+    //     this.recorder.startRecording(options, function() {
+    //     });
+    // }
 
-    _stopLocalVideoRecording(){
-        this.recorder.stopRecording(function(blob) {
-            // console.log(blob.size, blob);
-            // var url = URL.createObjectURL(blob);
+    // _stopLocalVideoRecording(){
+    //     this.recorder.stopRecording(function(blob) {
+    //         // console.log(blob.size, blob);
+    //         // var url = URL.createObjectURL(blob);
 
     
-            // var a = $("<a>")
-            //     .attr("href", url)
-            //     .attr("download", "vid.mp4")
-            //     .appendTo("body");
+    //         // var a = $("<a>")
+    //         //     .attr("href", url)
+    //         //     .attr("download", "vid.mp4")
+    //         //     .appendTo("body");
     
-            // a[0].click();
+    //         // a[0].click();
     
-            // a.remove();
-        });
-    }
+    //         // a.remove();
+    //     });
+    // }
     /**
      * Returns the buttons to be displayed in main or the overflow menu.
      *
