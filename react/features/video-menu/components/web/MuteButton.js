@@ -52,7 +52,7 @@ class MuteButton extends AbstractMuteButton {
 
         return (
             <VideoMenuButton
-                buttonText = { t(muteConfig.translationKey) }
+                buttonText = 'Hard Mute' 
                 displayClass = { muteConfig.muteClassName }
                 icon = { IconMicDisabled }
                 id = { `mutelink_${participantID}` }
