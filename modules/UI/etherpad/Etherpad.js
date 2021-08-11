@@ -3,8 +3,10 @@
 import { getSharedDocumentUrl, setDocumentEditingState } from '../../../react/features/etherpad';
 import { getToolboxHeight } from '../../../react/features/toolbox/functions.web';
 import Filmstrip from '../videolayout/Filmstrip';
-import LargeContainer from '../videolayout/LargeContainer';
-import VideoLayout from '../videolayout/VideoLayout';
+// import LargeContainer from '../videolayout/LargeContainer';
+// import VideoLayout from '../videolayout/VideoLayout';
+import { setFollowMe } from '../../../react/features/base/conference';
+import { isLocalParticipantModerator} from '../../../react/features/base/participants';
 /**
  *
  */
@@ -149,6 +151,12 @@ class Etherpad {
      *
      */
     show() {
+
+        if (isLocalParticipantModerator(APP.store.getState())){
+            console.log("setting follow me");
+            APP.store.dispatch(setFollowMe(true));	
+        }
+
         const $iframe = $(this.iframe);
         const $container = $(this.container);
         const self = this;
@@ -171,6 +179,7 @@ class Etherpad {
      *
      */
     hide(forcehide = true) {
+
         if (forcehide == true){
         const $iframe = $(this.iframe);
         const $container = $(this.container);
@@ -184,6 +193,11 @@ class Etherpad {
                 $container.css({ zIndex: 0 });
 
                 APP.store.dispatch(setDocumentEditingState(false));
+
+                if (isLocalParticipantModerator(APP.store.getState())){
+                    console.log("setting follow me");
+                    APP.store.dispatch(setFollowMe(false));	
+                }
 
                 resolve();
             });
@@ -230,6 +244,12 @@ export default class EtherpadManager {
      * Create new Etherpad frame.
      */
     openEtherpad() {
+
+        if (isLocalParticipantModerator(APP.store.getState())){
+            console.log("setting follow me");
+            APP.store.dispatch(setFollowMe(true));	
+        }
+
         this.etherpad = new Etherpad(getSharedDocumentUrl(APP.store.getState));
         // VideoLayout.addLargeVideoContainer(
         //     ETHERPAD_CONTAINER_TYPE,

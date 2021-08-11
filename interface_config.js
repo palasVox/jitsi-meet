@@ -9,7 +9,7 @@
  */
 
 var interfaceConfig = {
-    APP_NAME: 'VoxMeet',
+    APP_NAME: 'VoxMeet Video Conferencing- AI Enabled, Made In India',
     AUDIO_LEVEL_PRIMARY_COLOR: 'rgba(255,255,255,0.4)',
     AUDIO_LEVEL_SECONDARY_COLOR: 'rgba(255,255,255,0.2)',
 
@@ -204,7 +204,7 @@ var interfaceConfig = {
      */
     SUPPORT_URL: 'https://www.voxomos.com/?page_id=147',
 
-    TOOLBAR_ALWAYS_VISIBLE: true,
+    TOOLBAR_ALWAYS_VISIBLE: false,
 
     /**
      * DEPRECATED!

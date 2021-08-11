@@ -141,7 +141,7 @@ function _onFollowMeCommand(attributes = {}, id, store) {
         store.dispatch(setTileView(attributes.tileViewEnabled === 'true'));
     }
 
-    console.log("followme", oldState, "attributes", attributes);
+    // console.log("followme", oldState, "attributes", attributes);
 
     // For now gate etherpad checks behind a web-app check to be extra safe
     // against calling a web-app global.

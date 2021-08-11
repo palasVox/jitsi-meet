@@ -137,7 +137,7 @@ MiddlewareRegistry.register(store => next => action => {
     }
 
     case MUTE_REMOTE_PARTICIPANT: {
-        console.log("here", "MUTE_REMOTE_PARTICIPANT");
+        //console.log("here", "MUTE_REMOTE_PARTICIPANT");
         const { conference } = store.getState()['features/base/conference'];
 
         conference.muteParticipant(action.id, action.mediaType);
@@ -145,7 +145,7 @@ MiddlewareRegistry.register(store => next => action => {
     }
 
     case MUTE_REMOTE_PARTICIPANT_SOFT: {
-	console.log("here", "MUTE_REMOTE_PARTICIPANT_SOFT");
+	//console.log("here", "MUTE_REMOTE_PARTICIPANT_SOFT");
         const { conference } = store.getState()['features/base/conference'];
 
         conference.muteParticipantSoft(action.id, action.mediaType);

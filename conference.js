@@ -2066,18 +2066,18 @@ export default {
                 APP.store.dispatch(participantRoleChanged(id, role));
             }
 
-            const participants_list  = APP.store.getState()['features/base/participants'];
+            // const participants_list  = APP.store.getState()['features/base/participants'];
 
-            for (const participant of participants_list) {
-                if (participant.role == 'moderator'){
-                //APP.store.dispatch(pinParticipant(participant.id));
-                    if (isLocalParticipantModerator(APP.store.getState())){
-                        console.log("setting follow me");
-                        APP.store.dispatch(setFollowMe(true));	
-                    }
-                break;
-                }
-            }
+            // for (const participant of participants_list) {
+            //     if (participant.role == 'moderator'){
+            //     //APP.store.dispatch(pinParticipant(participant.id));
+            //         if (isLocalParticipantModerator(APP.store.getState())){
+            //             console.log("setting follow me");
+            //             APP.store.dispatch(setFollowMe(true));	
+            //         }
+            //     break;
+            //     }
+            // }
      
         });
 
