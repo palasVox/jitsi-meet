@@ -141,7 +141,7 @@ function on_message(event)
                 end
             else
                 enabled = false;
-                if not room.av_moderation or not room.av_moderation[mediaType] then
+                if not room.av_moderation then
                     module:log('warn', 'Concurrent moderator enable/disable request or something is out of sync');
                     return true;
                 else
