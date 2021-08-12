@@ -59,7 +59,7 @@ class TileViewButton<P: Props> extends AbstractButton<P, *> {
             {
                 'is_enabled': value
             }));
-        const value = !_tileViewEnabled;
+        // const value = !_tileViewEnabled;
 	
 	this.tooltip = value ? 'Enter Spotlight View' : 'Enter Tile View'; 
         logger.debug(`Tile view ${value ? 'enable' : 'disable'}`);

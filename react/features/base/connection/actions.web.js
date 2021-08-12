@@ -15,6 +15,8 @@ export {
     setLocationURL
 } from './actions.native';
 import logger from './logger';
+import { HangupDialog } from '../../video-menu';
+import { openDialog } from '../../base/dialog';
 
 /**
  * Opens new connection.
@@ -47,5 +49,6 @@ export function connect() {
 export function disconnect(requestFeedback: boolean = false) {
     // XXX For web based version we use conference hanging up logic from the old
     // app.
-    return () => APP.conference.hangup(requestFeedback);
+    //return () => APP.conference.hangup(requestFeedback);
+    return (dispatch: Dispatch<any>) => dispatch(openDialog(HangupDialog));
 }

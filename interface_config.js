@@ -9,7 +9,7 @@
  */
 
 var interfaceConfig = {
-    APP_NAME: 'VoxMeet',
+    APP_NAME: 'VoxMeet VideoConferencing - AI Enabled, Made In India',
     AUDIO_LEVEL_PRIMARY_COLOR: 'rgba(255,255,255,0.4)',
     AUDIO_LEVEL_SECONDARY_COLOR: 'rgba(255,255,255,0.2)',
 
@@ -269,7 +269,7 @@ var interfaceConfig = {
      * explicitly dismissed through a user action. The value is how long, in
      * milliseconds, those notifications should remain displayed.
      */
-    ENFORCE_NOTIFICATION_AUTO_DISMISS_TIMEOUT: 1000,
+    ENFORCE_NOTIFICATION_AUTO_DISMISS_TIMEOUT: 3000,
 
     // List of undocumented settings
     /**

@@ -149,14 +149,14 @@ export const DISPLAY_MODE_TO_STRING = [
  *
  * @type {number}
  */
-export const TILE_VERTICAL_MARGIN = 4;
+export const TILE_VERTICAL_MARGIN = 10;
 
 /**
  * The horizontal margin of a tile.
  *
  * @type {number}
  */
-export const TILE_HORIZONTAL_MARGIN = 4;
+export const TILE_HORIZONTAL_MARGIN = 10;
 
 /**
  * The height of the whole toolbar.

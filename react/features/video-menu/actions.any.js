@@ -21,7 +21,8 @@ import {
 import {
     getLocalParticipant,
     muteRemoteParticipant,
-    kickRemoteParticipant
+    kickRemoteParticipant,
+    getRemoteParticipants
 } from '../base/participants';
 
 declare var APP: Object;

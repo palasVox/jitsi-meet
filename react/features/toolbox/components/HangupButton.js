@@ -42,7 +42,7 @@ class HangupButton extends AbstractHangupButton<Props, *> {
     constructor(props: Props) {
         super(props);
 
-        this._hangup = _.once(() => {
+        /*this._hangup = _.once(() => {
             sendAnalytics(createToolbarEvent('hangup'));
 
             // FIXME: these should be unified.
@@ -51,7 +51,18 @@ class HangupButton extends AbstractHangupButton<Props, *> {
             } else {
                 this.props.dispatch(disconnect(true));
             }
-        });
+        });*/
+
+        this._hangup = () => {
+            sendAnalytics(createToolbarEvent('hangup'));
+
+            // FIXME: these should be unified.
+            if (navigator.product === 'ReactNative') {
+                this.props.dispatch(appNavigate(undefined));
+            } else {
+                this.props.dispatch(disconnect(true));
+            }
+        };
     }
 
     /**
