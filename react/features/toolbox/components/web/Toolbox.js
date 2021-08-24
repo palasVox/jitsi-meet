@@ -1242,7 +1242,7 @@ class Toolbox extends Component<Props> {
                     key = 'shareaudio'
                     onClick = { this._onToolbarToggleShareAudio }
                     text = { t('toolbar.shareaudio') } />,
-            this.props._shouldShowButton('etherpad')
+            this.props._shouldShowButton('etherpad') && (this.props._isModerator)
                 && <SharedDocumentButton
                     key = 'etherpad'
                     showLabel = { true } />,

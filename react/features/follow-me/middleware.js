@@ -50,6 +50,8 @@ let nextOnStageTimeout;
  * @type {number}
  */
 let nextOnStageTimer = 0;
+let etherpadTimeout;
+let etherpadTimer = 0;
 
 /**
  * Represents "Follow Me" feature which enables a moderator to (partially)
@@ -143,13 +145,16 @@ function _onFollowMeCommand(attributes = {}, id, store) {
     // against calling a web-app global.
     if (typeof APP !== 'undefined'
         && oldState.sharedDocumentVisible !== attributes.sharedDocumentVisible) {
-        const isEtherpadVisible = attributes.sharedDocumentVisible === 'true';
-        const documentManager = APP.UI.getSharedDocumentManager();
+        // const isEtherpadVisible = attributes.sharedDocumentVisible === 'true';
+        // const documentManager = APP.UI.getSharedDocumentManager();
 
-        if (documentManager
-                && isEtherpadVisible !== state['features/etherpad'].editing) {
-            documentManager.toggleEtherpad();
-        }
+        // if (documentManager
+        //         && isEtherpadVisible !== state['features/etherpad'].editing) {
+        //     documentManager.toggleEtherpad();
+        // }
+
+        const isEtherpadVisible = attributes.sharedDocumentVisible === 'true';
+        _handleEtherPad(isEtherpadVisible, state);
     }
 
     const pinnedParticipant = getPinnedParticipant(state);
@@ -189,6 +194,29 @@ function _pinVideoThumbnailById(store, clickId) {
             nextOnStageTimer++;
 
             _pinVideoThumbnailById(store, clickId);
+        }, 1000);
+    }
+}
+
+function _handleEtherPad(isEtherpadVisible,state) {
+    const documentManager = APP.UI.getSharedDocumentManager();
+    if (documentManager) {
+        clearTimeout(etherpadTimeout);
+        etherpadTimer = 0;
+        if (isEtherpadVisible !== state['features/etherpad'].editing){
+        documentManager.toggleEtherpad();
+        }
+    } else {
+        etherpadTimeout = setTimeout(() => {
+            if (etherpadTimer > _FOLLOW_ME_RECEIVED_TIMEOUT) {
+                etherpadTimer = 0;
+
+                return;
+            }
+
+            etherpadTimer++;
+
+            _handleEtherPad(isEtherpadVisible,state);
         }, 1000);
     }
 }

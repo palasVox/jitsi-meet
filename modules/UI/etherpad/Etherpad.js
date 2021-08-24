@@ -3,8 +3,8 @@
 import { getSharedDocumentUrl, setDocumentEditingState } from '../../../react/features/etherpad';
 import { getToolboxHeight } from '../../../react/features/toolbox/functions.web';
 import Filmstrip from '../videolayout/Filmstrip';
-import LargeContainer from '../videolayout/LargeContainer';
-import VideoLayout from '../videolayout/VideoLayout';
+// import LargeContainer from '../videolayout/LargeContainer';
+// import VideoLayout from '../videolayout/VideoLayout';
 /**
  *
  */
@@ -54,12 +54,12 @@ const ETHERPAD_CONTAINER_TYPE = 'etherpad';
 /**
  * Container for Etherpad iframe.
  */
-class Etherpad extends LargeContainer {
+class Etherpad {
     /**
      * Creates new Etherpad object
      */
     constructor(url) {
-        super();
+        //super();
 
         const iframe = document.createElement('iframe');
 
@@ -70,6 +70,8 @@ class Etherpad extends LargeContainer {
         iframe.width = DEFAULT_WIDTH;
         iframe.height = DEFAULT_HEIGHT;
         iframe.setAttribute('style', 'visibility: hidden;');
+
+
 
         this.container.appendChild(iframe);
 
@@ -94,6 +96,20 @@ class Etherpad extends LargeContainer {
         };
 
         this.iframe = iframe;
+
+        let height, width;
+
+        if (interfaceConfig.VERTICAL_FILMSTRIP) {
+            height = this.container.clientHeight - getToolboxHeight();
+            width = this.container.clientWidth - Filmstrip.getVerticalFilmstripWidth();
+        } else {
+            height = this.container.clientHeight - Filmstrip.getFilmstripHeight();
+            width = this.container.clientWidth;
+        }
+
+        $(this.iframe)
+            .width(width)
+            .height(height);
     }
 
     /**
@@ -154,7 +170,8 @@ class Etherpad extends LargeContainer {
     /**
      *
      */
-    hide() {
+    hide(forcehide = true) {
+        if (forcehide == true){
         const $iframe = $(this.iframe);
         const $container = $(this.container);
 
@@ -162,6 +179,7 @@ class Etherpad extends LargeContainer {
 
         return new Promise(resolve => {
             $iframe.fadeOut(300, () => {
+                console.log("followme", "casee1");
                 $iframe.css({ visibility: 'hidden' });
                 $container.css({ zIndex: 0 });
 
@@ -170,13 +188,14 @@ class Etherpad extends LargeContainer {
                 resolve();
             });
         });
+        } 
     }
 
     /**
      * @return {boolean} do not switch on dominant speaker event if on stage.
      */
     stayOnStage() {
-        return true;
+        return false;
     }
 }
 
@@ -203,7 +222,8 @@ export default class EtherpadManager {
      *
      */
     isVisible() {
-        return VideoLayout.isLargeContainerTypeVisible(ETHERPAD_CONTAINER_TYPE);
+        //return VideoLayout.isLargeContainerTypeVisible(ETHERPAD_CONTAINER_TYPE);
+        return APP.store.getState()['features/etherpad'].editing;
     }
 
     /**
@@ -211,10 +231,18 @@ export default class EtherpadManager {
      */
     openEtherpad() {
         this.etherpad = new Etherpad(getSharedDocumentUrl(APP.store.getState));
-        VideoLayout.addLargeVideoContainer(
-            ETHERPAD_CONTAINER_TYPE,
-            this.etherpad
-        );
+        // VideoLayout.addLargeVideoContainer(
+        //     ETHERPAD_CONTAINER_TYPE,
+        //     this.etherpad
+        // );
+        
+        const $iframe = $(this.etherpad.iframe);
+        const $container = $(this.etherpad.container);
+        console.log("followme", "in open etherpad", $iframe, $container)
+        document.body.style.background = '#eeeeee';
+        $iframe.css({ visibility: 'visible' });
+        $container.css({ zIndex: 2 });
+        APP.store.dispatch(setDocumentEditingState(true));        
     }
 
     /**
@@ -224,13 +252,20 @@ export default class EtherpadManager {
     toggleEtherpad() {
         if (!this.isOpen) {
             this.openEtherpad();
+            return;
         }
-
+        
         const isVisible = this.isVisible();
+        console.log("followme visibility", isVisible );
+        // VideoLayout.showLargeVideoContainer(
+        //     ETHERPAD_CONTAINER_TYPE, !isVisible);
 
-        VideoLayout.showLargeVideoContainer(
-            ETHERPAD_CONTAINER_TYPE, !isVisible);
-
-        APP.store.dispatch(setDocumentEditingState(!isVisible));
+        // APP.store.dispatch(setDocumentEditingState(!isVisible));
+        if (isVisible){
+            this.etherpad.hide();
+        } else {
+            this.etherpad.show();
+        }
+        
     }
 }
