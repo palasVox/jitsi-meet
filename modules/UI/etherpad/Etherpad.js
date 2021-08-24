@@ -5,6 +5,9 @@ import { getToolboxHeight } from '../../../react/features/toolbox/functions.web'
 import Filmstrip from '../videolayout/Filmstrip';
 // import LargeContainer from '../videolayout/LargeContainer';
 // import VideoLayout from '../videolayout/VideoLayout';
+import { isLocalParticipantModerator } from '../../../react/features/base/participants';
+import { setFollowMe } from '../../../react/features/base/conference';
+
 /**
  *
  */
@@ -149,6 +152,11 @@ class Etherpad {
      *
      */
     show() {
+        if (isLocalParticipantModerator(APP.store.getState())){
+            console.log("setting follow me");
+            APP.store.dispatch(setFollowMe(true)); 
+        }
+
         const $iframe = $(this.iframe);
         const $container = $(this.container);
         const self = this;
@@ -172,6 +180,7 @@ class Etherpad {
      */
     hide(forcehide = true) {
         if (forcehide == true){
+
         const $iframe = $(this.iframe);
         const $container = $(this.container);
 
@@ -179,11 +188,15 @@ class Etherpad {
 
         return new Promise(resolve => {
             $iframe.fadeOut(300, () => {
-                console.log("followme", "casee1");
                 $iframe.css({ visibility: 'hidden' });
                 $container.css({ zIndex: 0 });
 
                 APP.store.dispatch(setDocumentEditingState(false));
+
+                if (isLocalParticipantModerator(APP.store.getState())){
+                    console.log("setting follow me");
+                    APP.store.dispatch(setFollowMe(false)); 
+                }
 
                 resolve();
             });
@@ -230,6 +243,11 @@ export default class EtherpadManager {
      * Create new Etherpad frame.
      */
     openEtherpad() {
+        if (isLocalParticipantModerator(APP.store.getState())){
+            console.log("setting follow me");
+            APP.store.dispatch(setFollowMe(true)); 
+        }
+
         this.etherpad = new Etherpad(getSharedDocumentUrl(APP.store.getState));
         // VideoLayout.addLargeVideoContainer(
         //     ETHERPAD_CONTAINER_TYPE,
@@ -238,7 +256,6 @@ export default class EtherpadManager {
         
         const $iframe = $(this.etherpad.iframe);
         const $container = $(this.etherpad.container);
-        console.log("followme", "in open etherpad", $iframe, $container)
         document.body.style.background = '#eeeeee';
         $iframe.css({ visibility: 'visible' });
         $container.css({ zIndex: 2 });
@@ -256,7 +273,6 @@ export default class EtherpadManager {
         }
         
         const isVisible = this.isVisible();
-        console.log("followme visibility", isVisible );
         // VideoLayout.showLargeVideoContainer(
         //     ETHERPAD_CONTAINER_TYPE, !isVisible);
 
